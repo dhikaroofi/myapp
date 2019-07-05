@@ -1,0 +1,71 @@
+input {
+	border: 0px !important;
+	border-bottom: 1px solid black !important;
+	width: 100% !important;
+	height: 20px !important;
+	font-size: 13px !important;
+	-webkit-transition: all 0.3s !important;
+	/* Safari prior 6.1 */
+	transition: all 0.3s !important;
+}
+
+input:focus {
+	width: 80% !important;
+	position: relative !important;
+	outline: none !important;
+	font-size: 15px !important;
+	-webkit-transition: all 0.3s !important;
+	/* Safari prior 6.1 */
+	transition: all 0.3s !important;
+}
+
+.input {
+	background: white;
+	color: black;
+	border: 0px !important;
+	border-bottom: 1px solid black !important;
+	width: 100% !important;
+	height: 20px !important;
+	font-size: 13px !important;
+	-webkit-transition: all 0.3s !important;
+	/* Safari prior 6.1 */
+	transition: all 0.3s !important;
+}
+
+.input:focus {
+	width: 80% !important;
+	position: relative !important;
+	outline: none !important;
+	font-size: 15px !important;
+	-webkit-transition: all 0.3s !important;
+	/* Safari prior 6.1 */
+	transition: all 0.3s !important;
+}
+
+.btn-submit {
+	background: white !important;
+	padding: 8px !important;
+	width: 100% !important;
+	border: 1px solid black !important;
+	-webkit-transition: all 0.3s !important;
+	/* Safari prior 6.1 */
+	transition: all 0.3s !important;
+}
+
+.btn-submit:hover {
+	color: white !important;
+	background: black !important;
+}
+
+
+.nav-link:hover {
+	text-decoration: underline;
+}
+
+
+.table-custom {
+	height: 400px;
+	display: block !important;
+	overflow-x: auto !important;
+	white-space: nowrap !important;
+}
