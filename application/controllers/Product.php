@@ -122,24 +122,41 @@ class Product extends CI_Controller {
 			$this->template->load('back/layout','back/page/product/input',$data); 
 		}
 	}
-	public function show($id,$name){
-	
-			if ($id=="" && $name=="") {
-				redirect('product/index','refresh');
+	public function show(){
+			if (!isset($_POST['submit'])) {
+				return redirect('product/index');
 			}
-			$data['name'] = $name;
-			$data['id'] = $id;
+				$client = new Client();
+				$token  =  $this->session->userdata('token');
+				$response = $client->request('GET','http://demo.var-x.id/api/category'.'/get',
+				[
+					'headers' => [
+						'Accept'     => 'application/json',
+						'Authorization' => 'Bearer '.$token, 
+						'Content-Type' => 'application/json',
+						]
+				]);
+				$result = json_decode($response->getBody(),true);
+				$data['result'] = $result['data'];
+			$data['id'] = $this->input->post('id');
+			$data['name'] = $this->input->post('name');
+			$data['brand'] = $this->input->post('brand');
+			$data['price'] = $this->input->post('price');
+			$data['category_id'] = $this->input->post('category_id');
+			$data['quantity'] = $this->input->post('quantity');
+			$data['quantity_unit'] = $this->input->post('quantity_unit');
+			$data['purchase_date'] = $this->input->post('purchase_date');
 			$this->template->load('back/layout','back/page/product/show',$data); 
-	
 	}
 	public function update(){
 		if (isset($_POST['submit'])) {
 			try {
 				if ($this->validation()) {
-					redirect('product/add');
+					redirect('product/index');
 				}
 				$client = new Client();
 				$token  =  $this->session->userdata('token');
+				echo $this->API.'/'.$this->input->post('id');
 				$response = $client->request('PUT',$this->API.'/'.$this->input->post('id'),
 				[
 					'query'	  => [
@@ -155,35 +172,37 @@ class Product extends CI_Controller {
 						'Accept'     => 'application/json',
 						'Authorization' => 'Bearer '.$token, 
 						'Content-Type' => 'application/json'
-						]
+					],
 				]);
+				print_r($response);
 				if ($response->getStatusCode()=="200") {
-					$this->session->set_flashdata('succes', 'data has been added');
+					$this->session->set_flashdata('succes', 'data has been updated');
 					return redirect('product/index');
 				}else{
-					$this->session->set_flashdata('succes', 'data has been added');
+					$this->session->set_flashdata('failed', 'failed to update');
 				}
-				
 			} catch (GuzzleHttp\Exception\BadResponseException $e) {
 				$this->session->set_flashdata('alert', 'failed');
 			}
-			return redirect('product/add');
+			return redirect('product/');
 		}
 	}
 	public function delete($id){
 		try {
 			$client = new Client();
 			$token  =  $this->session->userdata('token');
+			echo $this->API.'/'.$id;
 			$response = $client->request('DELETE',$this->API.'/'.$id,
 			[
 				'headers' => [
-					'Accept'     => 'application/json',
 					'Authorization' => 'Bearer '.$token, 
-					'Content-Type' => 'application/json'
 					]
 			]);
+
 			if ($response->getStatusCode()=='200') {
 				$this->session->set_flashdata('succes', 'data has been removed');
+			}else{
+				$this->session->set_flashdata('alert', 'failed to delet data');
 			}
 		} catch (GuzzleHttp\Exception\BadResponseException $e) {
 			$this->session->set_flashdata('alert', 'failed');

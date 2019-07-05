@@ -55,9 +55,20 @@
 									<td>".$key['brand']."</td>
 									<td>".$key['price']."</td>
 									<td>".$key['category']['name']."</td>
-									<td>".$key['quantity']."</td>
+									<td>".$key['quantity']." ".$key['quantity_unit']."</td>
 									<td>".$key['purchase_date']."</td>
 									<td>
+										<form style='display:inline-block;' method='POST' action='".base_url()."product/show'>
+											<input type='hidden' name='id' value='".$key['id']."'/>
+											<input type='hidden' name='name' value='".$key['name']."'/>
+											<input type='hidden' name='brand' value='".$key['brand']."'/>
+											<input type='hidden' name='price' value='".$key['price']."'/>
+											<input type='hidden' name='category_id' value='".$key['category_id']."'/>
+											<input type='hidden' name='quantity' value='".$key['quantity']."'/>
+											<input type='hidden' name='quantity_unit' value='".$key['quantity_unit']."'/>
+											<input type='hidden' name='purchase_date' value='".$key['purchase_date']."'/>
+											<button class='btn btn-primary' name='submit'>Show</button>
+										</form>
 										<a class='btn btn-danger' href='".base_url()."product/delete/".$key['id']."'>Delete</a>
 									</td>
 								</tr>

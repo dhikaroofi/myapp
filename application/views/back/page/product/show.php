@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row justify-content-md-center">
-			<form class=" col-md-12 mt-5 p-5 shadow-sm p-3 mb-5 bg-white rounded" action="<?php echo base_url();?>product/add" method="POST">
-				<h1 class="mb-3">Create product</h1>
+			<form class=" col-md-12 mt-5 p-5 shadow-sm p-3 mb-5 bg-white rounded" action="<?php echo base_url();?>product/update" method="POST">
+				<h1 class="mb-3">Update product</h1>
 				<div class="w-50">
 					<input class="p-1 my-3" required type="text" name="name" placeholder="Name" value="<?php echo $name; ?>">
 				</div>
@@ -16,7 +16,7 @@
 						<option disabled selected value>Select Category</option>
 						<?php 
 							foreach ($result as $key) {
-								if ($key['id']==$id) {
+								if ($key['id']==$category_id) {
 									echo 
 										"<option value='".$key['id']."' selected>".$key['name']."</option>"
 									;
@@ -31,21 +31,24 @@
 					</select>
 				</div>
 				<div class="w-50">
-					<input class="p-1 my-3" required type="number" min="1"  name="quantity" placeholder="Quantity">
+					<input class="p-1 my-3" required type="number" min="1"  name="quantity" placeholder="Quantity" value="<?php echo $quantity;?>">
 				</div>
 				<div class="w-50">
 					<select class=" my-3 input" name="quantity_unit">
-						<option disabled selected value>Select Unit Quantity</option>
+						<option selected value='<?php echo $quantity_unit;?>'><?php echo $quantity_unit;?></option>
 						<option value="pcs">Pcs</option>
 						<option value="Unit">Unit</option>
 						<option value="Meter">Meter</option>
 					</select>
 				</div>
 				<div class="w-50">
-					<input class="p-1 my-3 mb-4" required type="date" name="purchase_date" placeholder="Purchase date">
+					<input type="hidden" name="id" value="<?php echo $id;?>">
+					<input class="p-1 my-3 mb-4" required type="date" name="purchase_date" placeholder="Purchase date" value="<?php echo $purchase_date;?>">
 				</div>
 				<div style="">
-					<button class="btn-submit col-md-2" name="submit">Create product</button>
+					<button class="btn-submit col-md-2" name="submit">Update product</button>
+					<a class="btn btn-submit col-md-2" href='<?php echo base_url()."product/delete/".$id; ?>"'>Delete Product</a>
+
 				</div>
 			</form>
 	</div>

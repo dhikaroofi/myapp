@@ -52,6 +52,10 @@ input:focus {
 	transition: all 0.3s !important;
 }
 
+.btn {
+	border-radius: 0 !important;
+}
+
 .btn-submit:hover {
 	color: white !important;
 	background: black !important;
