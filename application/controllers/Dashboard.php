@@ -22,6 +22,7 @@ class Dashboard extends CI_Controller {
 	
 	function __construct() {
 		parent::__construct();
+		header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 		if ((!$this->session->has_userdata('name')) && (!$this->session->has_userdata('token'))) {
 			return redirect('welcome/login','refresh');
 		}
